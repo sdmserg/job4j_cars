@@ -6,29 +6,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "auto_post")
-public class Post {
+@Table(name = "PRICE_HISTORY")
+public class PriceHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer id;
-    private String description;
+    private Long before;
+    private Long after;
 
     @Column(name = "created", insertable = false, updatable = false)
     private LocalDateTime created;
-
-    @ManyToOne
-    @JoinColumn(name = "auto_user_id")
-    private User user;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "auto_post_id")
-    private List<PriceHistory> priceHistory = new ArrayList<>();
 }
